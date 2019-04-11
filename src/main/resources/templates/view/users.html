@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File</title>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+    <div class="container" th:align="center">
+        <form data-toggle="validator" action="" onsubmit="filevalid()" th:action="@{'/fileupload'}" th:object="${user}"
+              enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label for="fileupload">Upload XML:</label>
+                <input required type="file" pattern="User.xlsx" class="form-control" id="fileupload"
+                       th:field="*{file}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="container" th:align="center">
+        <h1>Users Details </h1>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>File Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-secondary" th:each="user:${users}">
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.fileType}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function filevalid() {
+        var input = document.getElementById('fileupload');
+        var filename = input.value;
+        var filename = filename.substring(filename.lastIndexOf('\\') + 1);
+        console.log(filename);
+        if (filename != "Users.xlsx") {
+            alert("Please Upload Users Excel File Only Specified File");
+        }
+    }
+</script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
