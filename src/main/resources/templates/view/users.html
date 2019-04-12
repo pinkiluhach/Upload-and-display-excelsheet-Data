@@ -18,7 +18,7 @@
         <form data-toggle="validator" action="" onsubmit="filevalid()" th:action="@{'/fileupload'}" th:object="${user}"
               enctype="multipart/form-data" method="post">
             <div class="form-group">
-                <label for="fileupload">Upload XML:</label>
+                <label for="fileupload">Upload File</label>
                 <input required type="file" pattern="User.xlsx" class="form-control" id="fileupload"
                        th:field="*{file}"/>
             </div>
